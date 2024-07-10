@@ -32,12 +32,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .register_encoded_file_descriptor_set(proto::FILE_DESCRIPTOR_SET)
         .build()
         .unwrap();
+    let service_alpha = tonic_reflection::server_alpha::Builder::configure()
+        .register_encoded_file_descriptor_set(proto::FILE_DESCRIPTOR_SET)
+        .build()
+        .unwrap();
 
     let addr = "[::1]:50052".parse().unwrap();
     let greeter = MyGreeter::default();
 
     Server::builder()
         .add_service(service)
+        .add_service(service_alpha)
         .add_service(proto::greeter_server::GreeterServer::new(greeter))
         .serve(addr)
         .await?;

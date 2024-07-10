@@ -67,6 +67,9 @@ pub mod pb {
     }
 }
 
-/// Implementation of the server component of gRPC Server Reflection.
+/// Implementation of the server component of gRPC Server Reflection v1.
 #[cfg(feature = "server")]
 pub mod server;
+/// Implementation of the server component of gRPC Server Reflection v1alpha.
+#[cfg(feature = "server")]
+pub mod server_alpha;
